@@ -1,0 +1,48 @@
+server:
+  port: 8081
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:postgresql://localhost:5431/db_food_delivery
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+      connection-test-query: SELECT 1
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        globally_quoted_identifiers: true
+        generate_statistics: true
+        jdbc:
+          batch_size: 100
+        cache:
+          use_second_level_cache: false
+logging:
+  level:
+    com:
+      security: DEBUG
+    org:
+      springframework:
+        security: DEBUG
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE

@@ -17,10 +17,15 @@ import java.util.Map;
 
 @Configuration
 public class KafkaConfig {
+
+    //    Topic: new-orders
+//├── Partition 0: order1, order4, order7
+//├── Partition 1: order2, order5, order8
+//└── Partition 2: order3, order6, order9
     @Bean
     public NewTopic orderTopic() {
         return TopicBuilder.name("new-orders")
-                .partitions(3)
+                .partitions(3) // Create topic with 3 partitions
                 .replicas(1)
                 .build();
     }

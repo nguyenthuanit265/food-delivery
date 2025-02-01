@@ -1,6 +1,30 @@
 server:
   port: 8081
 spring:
+  kafka:
+    bootstrap-servers: localhost:29092
+    consumer:
+      groups:
+        order:
+          id: order-processing-group
+          partitions:
+            0: # Partition 0 starts from offset 100
+              offset: 0
+            1: # Partition 1 starts from offset 50
+              offset: 0
+            2: # Partition 2 starts from beginning
+              offset: 0
+        delivery:
+          id: delivery-tracking-group
+          partitions:
+            0: # Partition 0 starts from offset 100
+              offset: 0
+            1: # Partition 1 starts from offset 50
+              offset: 0
+            2: # Partition 2 starts from beginning
+              offset: 0
+        notification:
+          id: notification-service-group
   jackson:
     property-naming-strategy: SNAKE_CASE
   application:
@@ -21,8 +45,8 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: none
-#      naming:
-#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    #      naming:
+    #        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

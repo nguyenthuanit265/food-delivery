@@ -42,7 +42,8 @@ public class OrderService {
         Order savedOrder = orderRepository.save(order);
 
         // Send to Kafka
-        kafkaTemplate.send("new-orders", savedOrder);
+        String key = order.getId().toString();
+        kafkaTemplate.send("new-orders", key, order);
         return savedOrder;
     }
 
